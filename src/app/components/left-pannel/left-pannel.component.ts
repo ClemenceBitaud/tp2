@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Router} from "@angular/router";
 
 @Component({
@@ -8,19 +8,16 @@ import {Router} from "@angular/router";
 })
 export class LeftPannelComponent implements OnInit {
 
-  isDashboard = false;
+  @Input() buttonText!: string;
+  @Input() navigateTo!: string;
 
   constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  goToDashboard(){
-    this.router.navigate(['/dashboard']);
-  }
-
-  goToMap(){
-    this.router.navigate(['/map']);
+  navigate(){
+    this.router.navigate([this.navigateTo]);
   }
 
 }
