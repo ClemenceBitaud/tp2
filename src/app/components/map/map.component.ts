@@ -33,7 +33,7 @@ export class MapComponent implements OnInit {
 
     if (this.devices.length !== 0){
       for (let device of this.devices){
-        this.addMarker(device, this.map, this.devices);
+        this.addMarker(device);
       }
     }
   }
@@ -45,12 +45,12 @@ export class MapComponent implements OnInit {
       if (result !== undefined){
         const device = new Device(result, event.latlng);
         this.devices.push(device);
-        this.addMarker(device, this.map, this.devices);
+        this.addMarker(device);
       }
     })
   }
 
-  addMarker(device: Device, map: L.Map, devices: Device[]){
+  addMarker(device: Device){
 
     const icon = {
       icon: L.icon({
@@ -66,22 +66,45 @@ export class MapComponent implements OnInit {
                 <span>ID : ${device.id}</span>
                 <span>Name: ${device.name}</span>
                 <span>Date : ${formatDate(device.date, 'mediumDate', 'en-US')}</span>
+                <button class="edit-marker mat-raised-button">Modifier</button>
                 <button class="supress-marker mat-raised-button">Supprimer</button>
             </div>`;
     const marker = L.marker(device.latLng, icon);
-    map.addLayer(marker);
+    this.map.addLayer(marker);
     marker.bindPopup(popUpContent);
 
     marker.on('click', (e => {
       stopPropagation(e);
       marker.openPopup()
-      $(".supress-marker:visible").click(function () {
-        map.removeLayer(marker);
-        const index = devices.indexOf(device, 0);
-        if (index > -1) {
-          devices.splice(index, 1);
-        }
-      });
+      this.deleteMarker(marker, device);
+      this.editDevice(device);
+
     }))
+  }
+
+  deleteMarker(marker: L.Marker, device: Device){
+    const map = this.map;
+    const devices= this.devices;
+
+    $(".supress-marker:visible").click(function () {
+      map.removeLayer(marker);
+      const index = devices.indexOf(device, 0);
+      if (index > -1) {
+        devices.splice(index, 1);
+      }
+    });
+  }
+
+  editDevice(device: Device){
+    const dialog = this.dialog;
+    const devices = this.devices;
+    $(".edit-marker:visible").click(function () {
+      const dialogRef = dialog.open(AddMarkerDialogComponent, {data: device});
+
+      dialogRef.afterClosed().subscribe(result => {
+        device.name = result;
+        console.log(devices);
+      })
+    });
   }
 }
