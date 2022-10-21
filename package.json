@@ -3,11 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+//    "start": "ng serve",
+    "start" : "node server.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "heroku-postbuild": "ng build --prod"
   },
+  "engines": { "node": "16.14.2", "npm": "8.5.0" },
   "private": true,
   "dependencies": {
     "@angular/animations": "^14.2.0",
@@ -21,8 +24,10 @@
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
     "@asymmetrik/ngx-leaflet": "^14.0.1",
+    "express": "^4.18.2",
     "jquery": "^3.6.1",
     "leaflet": "^1.9.2",
+    "path": "^0.12.7",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
