@@ -31,6 +31,9 @@ export class MapComponent implements OnInit {
       this.openDialog(event);
     }));
 
+    const device = new Device("Test1", new L.LatLng(51.50746034612789,-0.08417491572605408));
+    this.devices.push(device);
+
     if (this.devices.length !== 0){
       for (let device of this.devices){
         this.addMarker(device);
@@ -56,8 +59,7 @@ export class MapComponent implements OnInit {
       icon: L.icon({
         iconSize: [ 41, 41 ],
         iconAnchor: [ 13, 0 ],
-        // specify the path here
-        iconUrl: './assets/location.png',
+        iconUrl: './assets/marker.png',
       })
     };
     const popUpContent = `
