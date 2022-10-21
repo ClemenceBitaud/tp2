@@ -32,7 +32,15 @@ export class DashboardDeviceComponent implements OnInit {
   }
 
   openEdit(device: Device){
-    this.dialog.open(AddMarkerDialogComponent, {data: device})
+
+    const dialogRef = this.dialog.open(AddMarkerDialogComponent, {data: device});
+
+    dialogRef.afterClosed().subscribe(result => {
+      device.name = result;
+      this.table.renderRows();
+    })
+
+
   }
 
 }

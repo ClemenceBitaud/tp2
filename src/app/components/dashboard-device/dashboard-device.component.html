@@ -16,7 +16,7 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell  *matHeaderCellDef > Actions </th>
     <td mat-cell *matCellDef="let device; let j = index;" >
-      <button mat-button >Edit</button>
+      <button mat-button (click)="openEdit(device)" >Edit</button>
       <button mat-button (click)="openDetail(device)">Detail</button>
       <button mat-button (click)="deleteDevice(j)">Delete</button>
     </td>
