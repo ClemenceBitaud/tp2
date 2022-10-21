@@ -29,7 +29,7 @@ export class MapComponent implements OnInit {
 
     // const marker = L.marker([51.5, -0.09]).addTo(myMap);
 
-    this.map.on('click', (event => {
+    this.map.on('dblclick', (event => {
       this.openDialog(event);
     }));
   }
@@ -41,38 +41,37 @@ export class MapComponent implements OnInit {
       if (result !== undefined){
         const icon = {
           icon: L.icon({
-            iconSize: [ 25, 41 ],
+            iconSize: [ 41, 41 ],
             iconAnchor: [ 13, 0 ],
             // specify the path here
-            iconUrl: './node_modules/leaflet/dist/images/marker-icon.png',
-            shadowUrl: './node_modules/leaflet/dist/images/marker-shadow.png'
+            iconUrl: './assets/location.png',
           })
         };
-        const marker = L.marker(event.latlng, icon);
-        marker.addTo(this.map);
 
-        const device = new Device(result, marker);
-
-        marker.on('click', (e => {
-          stopPropagation(e);
-          const popUpContent = `
+        const device = new Device(result);
+        const popUpContent = `
              <div style="display: flex; flex-direction: column">
                 <span style="font-weight: bold">------ Détail device ------</span>
                 <span>ID : ${device.id}</span>
                 <span>Name: ${device.name}</span>
                 <span>Date : ${formatDate(device.date, 'mediumDate', 'en-US')}</span>
-                <button id="removeMarkerButton" mat-raised-button color="warn">Supprimer</button>
+                <button class="supress-marker mat-raised-button">Supprimer</button>
             </div>`;
+        const marker = L.marker(event.latlng, icon);
+        this.map.addLayer(marker);
+        marker.bindPopup(popUpContent);
+        const map = this.map;
 
-          L.popup()
-            .setLatLng(marker.getLatLng())
-            .setContent(popUpContent)
-            .openOn(this.map);
+        marker.on('click', (e => {
+          stopPropagation(e);
+          marker.openPopup()
+          $(".supress-marker:visible").click(function () {
+            map.removeLayer(marker);
+          });
         }))
 
         this.devices.push(device);
       }
     })
   }
-
 }

@@ -4,13 +4,11 @@ export class Device {
   private _id: string;
   private _name: string;
   private _date: Date;
-  private _marker: L.Marker;
 
-  constructor(name: string, marker: L.Marker) {
+  constructor(name: string) {
     this._id = `DeviceID_${Math.round(Math.random()*100000000000)}`;
     this._name = name;
     this._date = new Date();
-    this._marker = marker;
   }
 
   get id(): string {
@@ -36,14 +34,4 @@ export class Device {
   set date(value: Date) {
     this._date = value;
   }
-
-  get marker(): L.Marker {
-    return this._marker;
-  }
-
-  set marker(value: L.Marker) {
-    this._marker = value;
-  }
-
-
 }
