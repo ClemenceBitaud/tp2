@@ -3,13 +3,16 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start" : "node server.js",
+    "start": "node server.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "heroku-postbuild": "ng build --configuration=production"
   },
-  "engines": { "node": "16.14.2", "npm": "8.5.0" },
+  "engines": {
+    "node": "16.14.2",
+    "npm": "8.5.0"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "^14.2.0",
@@ -17,6 +20,7 @@
     "@angular/common": "^14.2.0",
     "@angular/compiler": "^14.2.0",
     "@angular/core": "^14.2.0",
+    "@angular/fire": "^7.4.1",
     "@angular/forms": "^14.2.0",
     "@angular/material": "^14.2.5",
     "@angular/platform-browser": "^14.2.0",
