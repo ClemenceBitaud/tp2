@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Device} from "./model/device";
 
 @Component({
   selector: 'app-root',

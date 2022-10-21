@@ -4,12 +4,15 @@ export class Device {
   private _id: string;
   private _name: string;
   private _date: Date;
+  private _latLng: L.LatLng;
 
-  constructor(name: string) {
-    this._id = `DeviceID_${Math.round(Math.random()*100000000000)}`;
+  constructor(name: string, latLng: L.LatLng) {
+    this._id = `DeviceID_${Math.round(Math.random() * 100000000000)}`;
     this._name = name;
     this._date = new Date();
+    this._latLng = latLng;
   }
+
 
   get id(): string {
     return this._id;
@@ -33,5 +36,13 @@ export class Device {
 
   set date(value: Date) {
     this._date = value;
+  }
+
+  get latLng(): L.LatLng {
+    return this._latLng;
+  }
+
+  set latLng(value: L.LatLng) {
+    this._latLng = value;
   }
 }

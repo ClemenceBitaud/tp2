@@ -6,7 +6,7 @@
   flex: 1;
   background-color: #2a3f54;
 }
-
-.app-dashboard {
+.app-map {
+  width: 100%;
   flex: 5;
 }

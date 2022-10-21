@@ -1,5 +1,4 @@
 <div class="container">
   <app-left-pannel class="app-left-pannel"></app-left-pannel>
-  <app-dashboard-device class="app-dashboard" [devices]="devices"></app-dashboard-device>
+  <app-map *ngIf="isMapDisplay" class="app-map"></app-map>
 </div>
-
